@@ -1,6 +1,6 @@
 # Fast-Vortex-Particles
 
-![image](https://user-images.githubusercontent.com/47603904/117416798-08685d80-af1a-11eb-999b-d7f2dd0d6fe9.png)
+![image](https://user-images.githubusercontent.com/47603904/117417230-6ac15e00-af1a-11eb-9625-00f9d1790424.png)
 
 ![image](https://github.com/LeonidBraun/Fast-Vortex-Particles/blob/main/images/Jet.PNG?raw=true)
 
