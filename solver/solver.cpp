@@ -48,10 +48,10 @@ void force(std::vector<float>& u, std::vector<float>& x, std::vector<float>& G, 
     u.push_back(0); u.push_back(0);
     u.push_back(0); u.push_back(0);
 
-    G.push_back(dt / 2);
-    G.push_back(dt / 2);
     G.push_back(-dt / 2);
     G.push_back(-dt / 2);
+    G.push_back(dt / 2);
+    G.push_back(dt / 2);
 }
 
 void downsample(std::vector<float>& x, std::vector<float>& G, float dx, float xcut) {
@@ -116,6 +116,19 @@ void merge(std::vector<float>& u, std::vector<float>& x, std::vector<float>& G) 
     G = Gp;
 }
 
+void initData(std::vector<float>& u, std::vector<float>& x, std::vector<float>& G) {
+    for (size_t i = 0; i < 1000; i++) {
+        float a = 2.0f * 3.14f * (float)i / 1000.0f;
+        float X = std::cos(a) - 5;
+        float Y = std::sin(a);
+        x.push_back(X);
+        x.push_back(Y);
+        G.push_back(Y / 1000.0);
+        u.push_back(0);
+        u.push_back(0);
+    }
+}
+
 // simple naive summation for testing
 void calcVelNaiveandStep(std::vector<float> &u, std::vector<float> &x, const std::vector<float> &G, const float &h, const float &dt) {
 #pragma omp parallel for
@@ -147,17 +160,10 @@ int main() {
     std::vector<float> u;
     std::vector<float> x;
     std::vector<float> G;
-    for (size_t i = 0; i < 200; i++) {
-        float a = 2.0f*3.14f*(float)i / 200.0f;
-        float X = std::cos(a)-5;
-        float Y = std::sin(a);
-        x.push_back(X);
-        x.push_back(Y);
-        G.push_back(Y*0);
-        u.push_back(0);
-        u.push_back(0);
-    }
-    float dt = 0.001f;
+    
+    initData(u, x, G);
+
+    float dt = 0.002f;
 
     std::cout << G.size() << "\n";
     auto t1 = std::chrono::high_resolution_clock::now();
@@ -165,9 +171,9 @@ int main() {
         exportData(x, u, G, "test", i);
         std::cout << "iteration: " << i << "\n";
 
-        for (size_t l = 0; l < 50; l++) {
-            force(u, x, G, 1 * dt);
-            for (size_t k = 0; k < 1; k++) {
+        for (size_t l = 0; l < 5; l++) {
+            force(u, x, G, 10 * dt);
+            for (size_t k = 0; k < 10; k++) {
                 //Euler + N^2
                 //calcVelNaiveandStep(u, x, G, h, dt);
 

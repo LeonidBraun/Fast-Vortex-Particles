@@ -122,7 +122,7 @@ void destroyTree(Tree& tree) {
 void calcVelandStep(std::vector<float>& u, std::vector<float>& x, const std::vector<float>& G, const float& h, Tree& tree, const float& dt) {
 #pragma omp parallel for
     for (long long i = 0; i < G.size(); i++) {
-        float up = -1.0f, vp = 0.0f;
+        float up = -x[2 * i + 0], vp = x[2 * i + 1];
         evaluate(up, vp, x[2 * i + 0], x[2 * i + 1], h, *tree.root, tree.xm, tree.ym, tree.D);
         u[2 * i + 0] = up;
         u[2 * i + 1] = vp;
@@ -136,7 +136,7 @@ void calcVelRK2(std::vector<float>& u, std::vector<float>& x, const std::vector<
     Tree tree = createTree(x, G, h);
 #pragma omp parallel for
     for (long long i = 0; i < G.size(); i++) {
-        float up = -1.0f, vp = 0.0f;
+        float up = -2.5f, vp = 0.0f;
         evaluate(up, vp, x[2 * i + 0], x[2 * i + 1], h, *tree.root, tree.xm, tree.ym, tree.D);
         x_p[2 * i + 0] = x[2 * i + 0] + 0.5f * dt * up;
         x_p[2 * i + 1] = x[2 * i + 1] + 0.5f * dt * vp;
@@ -145,7 +145,7 @@ void calcVelRK2(std::vector<float>& u, std::vector<float>& x, const std::vector<
     tree = createTree(x_p, G, h);
 #pragma omp parallel for
     for (long long i = 0; i < G.size(); i++) {
-        float up = -1.0f, vp = 0.0f;
+        float up = -2.5f, vp = 0.0f;
         evaluate(up, vp, x_p[2 * i + 0], x_p[2 * i + 1], h, *tree.root, tree.xm, tree.ym, tree.D);
         x[2 * i + 0] += dt * up;
         x[2 * i + 1] += dt * vp;
