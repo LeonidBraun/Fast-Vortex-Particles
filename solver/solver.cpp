@@ -116,6 +116,7 @@ void merge(std::vector<float>& u, std::vector<float>& x, std::vector<float>& G) 
     G = Gp;
 }
 
+// simple naive summation for testing
 void calcVelNaiveandStep(std::vector<float> &u, std::vector<float> &x, const std::vector<float> &G, const float &h, const float &dt) {
 #pragma omp parallel for
     for (long long i = 0; i < G.size(); i++) {
@@ -167,11 +168,16 @@ int main() {
         for (size_t l = 0; l < 50; l++) {
             force(u, x, G, 1 * dt);
             for (size_t k = 0; k < 1; k++) {
+                //Euler + N^2
                 //calcVelNaiveandStep(u, x, G, h, dt);
 
-                Tree tree = createTree(x, G, h);
-                calcVelandStep(u, x, G, h, tree, dt);
-                destroyTree(tree);
+                // Euler
+                //Tree tree = createTree(x, G, h);
+                //calcVelandStep(u, x, G, h, tree, dt);
+                //destroyTree(tree);
+
+                //RK2 distance preserving
+                calcVelRK2(u, x, G, h, dt);
             }
         }
         merge(u, x, G);

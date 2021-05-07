@@ -1,7 +1,4 @@
-
-
 #include "barneshut.h"
-
 
 int select(float x, float y) {
     int a = x > 0 ? 1 : 0;
@@ -99,7 +96,7 @@ void deleteBranch(Branch& branch) {
     return;
 }
 
-Tree createTree(std::vector<float>& x, std::vector<float>& G, const float& h) {
+Tree createTree(const std::vector<float>& x, const std::vector<float>& G, const float& h) {
     float xmax = x[0], xmin = x[0], ymax = x[1], ymin = x[1];
     for (size_t i = 1; i < G.size(); i++) {
         xmax = x[2 * i + 0] > xmax ? x[2 * i + 0] : xmax;
@@ -132,4 +129,28 @@ void calcVelandStep(std::vector<float>& u, std::vector<float>& x, const std::vec
         x[2 * i + 0] += dt * up;
         x[2 * i + 1] += dt * vp;
     }
+}
+
+void calcVelRK2(std::vector<float>& u, std::vector<float>& x, const std::vector<float>& G, const float& h, const float& dt) {
+    std::vector<float> x_p(x.size());
+    Tree tree = createTree(x, G, h);
+#pragma omp parallel for
+    for (long long i = 0; i < G.size(); i++) {
+        float up = -1.0f, vp = 0.0f;
+        evaluate(up, vp, x[2 * i + 0], x[2 * i + 1], h, *tree.root, tree.xm, tree.ym, tree.D);
+        x_p[2 * i + 0] = x[2 * i + 0] + 0.5f * dt * up;
+        x_p[2 * i + 1] = x[2 * i + 1] + 0.5f * dt * vp;
+    }
+    destroyTree(tree);
+    tree = createTree(x_p, G, h);
+#pragma omp parallel for
+    for (long long i = 0; i < G.size(); i++) {
+        float up = -1.0f, vp = 0.0f;
+        evaluate(up, vp, x_p[2 * i + 0], x_p[2 * i + 1], h, *tree.root, tree.xm, tree.ym, tree.D);
+        x[2 * i + 0] += dt * up;
+        x[2 * i + 1] += dt * vp;
+        u[2 * i + 0] = up;
+        u[2 * i + 1] = vp;
+    }
+    destroyTree(tree);
 }
