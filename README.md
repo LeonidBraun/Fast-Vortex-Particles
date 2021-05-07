@@ -1,6 +1,14 @@
 # Fast-Vortex-Particles
 
-![image](https://user-images.githubusercontent.com/47603904/117417230-6ac15e00-af1a-11eb-9625-00f9d1790424.png)
+In 2D:
+
+![image](https://user-images.githubusercontent.com/47603904/117421033-6f881100-af1e-11eb-8e44-fbda10239be7.png)
+
+In 3D (future):
+
+![image](https://user-images.githubusercontent.com/47603904/117420541-f8527d00-af1d-11eb-812e-fb4e611a7eb6.png)
+
+also some Viscous-Domains-Diffusion-formulation and or Vorticity-Exchange-Diffusion-formulation will be added!
 
 ![image](https://github.com/LeonidBraun/Fast-Vortex-Particles/blob/main/images/Jet.PNG?raw=true)
 
