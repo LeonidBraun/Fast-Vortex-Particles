@@ -20,6 +20,9 @@ https://user-images.githubusercontent.com/47603904/117414889-f5ed2480-af17-11eb-
 
 `git clone https://github.com/LeonidBraun/Fast-Vortex-Particles.git`
 
+
+`cd Fast-Vortex-Particles.git`
+
 `mkdir build`
 
 `cd build`
