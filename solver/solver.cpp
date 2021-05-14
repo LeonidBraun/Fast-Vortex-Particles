@@ -71,7 +71,7 @@ void downsample(std::vector<float>& x, std::vector<float>& G, float dx, float xc
         float G_first = NAN;
         for (size_t i = 0; i < G.size(); i++) {
             if (cell[i] == id) {
-                if (isnan(G_first)) {
+                if (std::isnan(G_first)) {
                     i_first = i;
                     x_first = x[2 * i + 0] * G[i];
                     y_first = x[2 * i + 1] * G[i];
@@ -85,7 +85,7 @@ void downsample(std::vector<float>& x, std::vector<float>& G, float dx, float xc
                 }
             }
         }
-        if (!isnan(G_first)) {
+        if (!std::isnan(G_first)) {
             x[2 * i_first + 0] = x_first / G_first;
             x[2 * i_first + 1] = y_first / G_first;
             G[i_first] = G_first;
@@ -104,7 +104,7 @@ void merge(std::vector<float>& u, std::vector<float>& x, std::vector<float>& G) 
     std::vector<float> xp;
     std::vector<float> Gp;
     for (long long i = 0; i<G.size(); i++) {
-        if (std::fabsf(G[i]) < 1e-6) continue;
+        if (std::fabs(G[i]) < 1e-6) continue;
         xp.push_back(x[2 * i + 0]);
         xp.push_back(x[2 * i + 1]);
         up.push_back(u[2 * i + 0]);

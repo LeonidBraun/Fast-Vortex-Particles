@@ -38,7 +38,7 @@ void insert(const float& x, const float& y, const float& G, const float& h, Bran
     branch.y += dy * G;
     branch.G += G;
     int s = select(dx, dy);
-    if (isnan(branch.child[s].G)) {
+    if (std::isnan(branch.child[s].G)) {
         branch.child[s].x = x;
         branch.child[s].y = y;
         branch.child[s].G = G;
@@ -79,7 +79,7 @@ void evaluate(float& u, float& v, const float& x, const float& y, const float& h
     }
     //float up = 0.0f, vp = 0.0f;
     for (int i = 0; i < 4; i++) {
-        if (isnan(branch.child[i].G)) continue;
+        if (std::isnan(branch.child[i].G)) continue;
         float dir_x = 0.5f * (i % 2) - 0.25f;
         float dir_y = 0.5f * (i / 2) - 0.25f;
         evaluate(u, v, x, y, h, branch.child[i], xm + dir_x * D, ym + dir_y * D, 0.5f * D);
