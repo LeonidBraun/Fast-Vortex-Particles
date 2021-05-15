@@ -16,12 +16,11 @@ also some Viscous-Domains-Diffusion-formulation and or Vorticity-Exchange-Diffus
 
 https://user-images.githubusercontent.com/47603904/117414889-f5ed2480-af17-11eb-8b43-a38834467c71.mp4
 
-## Installation Windows
+## Installation
 
 `git clone https://github.com/LeonidBraun/Fast-Vortex-Particles.git`
 
-
-`cd Fast-Vortex-Particles.git`
+`cd Fast-Vortex-Particles`
 
 `mkdir build`
 
