@@ -153,7 +153,13 @@ void calcVelNaiveandStep(std::vector<float> &u, std::vector<float> &x, const std
     }
 }
 
+void draw() {
+
+}
+
 int main() {
+
+    std::cout << "Num. of Threads: " << omp_get_max_threads() << "\n";
 
     float H = 0.01f;
     float h = H * H;
@@ -169,7 +175,8 @@ int main() {
     auto t1 = std::chrono::high_resolution_clock::now();
     for (size_t i = 0; i < 400; i++) {
         exportData(x, u, G, "test", i);
-        std::cout << "iteration: " << i << "\n";
+        system("cls");
+        std::cout << "finished: " << (int)(i/4) << "%   iterations: " << i*50 << "   num. Particles: " << G.size() << "\n";
 
         for (size_t l = 0; l < 5; l++) {
             force(u, x, G, 10 * dt);
@@ -191,7 +198,7 @@ int main() {
 
     auto t2 = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double, std::milli> fp_ms = t2 - t1;
-    std::cout << "delta time: " << fp_ms.count() << "\n";
+    std::cout << "delta time: " << fp_ms.count()/1000 << "\n";
 
 	return 0;
 }
