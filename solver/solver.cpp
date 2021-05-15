@@ -1,7 +1,7 @@
 #include <vector>
 #include <cmath>
 #include <iostream>
-#include <chrono>
+//#include <chrono>
 #include <string>
 
 #include "omp.h"
@@ -172,10 +172,10 @@ int main() {
     float dt = 0.002f;
 
     std::cout << G.size() << "\n";
-    auto t1 = std::chrono::high_resolution_clock::now();
+    //auto t1 = std::chrono::high_resolution_clock::now();
     for (size_t i = 0; i < 400; i++) {
         exportData(x, u, G, "test", i);
-        system("cls");
+        //system("cls");
         std::cout << "finished: " << (int)(i/4) << "%   iterations: " << i*50 << "   num. Particles: " << G.size() << "\n";
 
         for (size_t l = 0; l < 5; l++) {
@@ -196,9 +196,9 @@ int main() {
         merge(u, x, G);
     }
 
-    auto t2 = std::chrono::high_resolution_clock::now();
-    std::chrono::duration<double, std::milli> fp_ms = t2 - t1;
-    std::cout << "delta time: " << fp_ms.count()/1000 << "\n";
+    //auto t2 = std::chrono::high_resolution_clock::now();
+    //std::chrono::duration<double, std::milli> fp_ms = t2 - t1;
+    //std::cout << "delta time: " << fp_ms.count()/1000 << "\n";
 
 	return 0;
 }
