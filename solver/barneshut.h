@@ -1,9 +1,7 @@
 #pragma once
 #include <vector>
 #include <cmath>
-#include <iostream>
-#include <chrono>
-#include <string>
+//#include <iostream>
 #include "omp.h"
 
 struct Branch {
