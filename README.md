@@ -28,4 +28,4 @@ https://user-images.githubusercontent.com/47603904/117414889-f5ed2480-af17-11eb-
 
 `cmake ..`
 
-`make` on Linux or open Visual Studio Solution file on Windows
+`make` on Linux or open `Particle.sln` in Visual Studio on Windows
