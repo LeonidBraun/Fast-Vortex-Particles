@@ -60,7 +60,7 @@ void evaluate(float& u, float& v, const float& x, const float& y, const float& h
     float dx = x - xm;
     float dy = y - ym;
     float d2 = dx * dx + dy * dy;
-    if (d2 > (3.0f * 3.0f * D * D)) {
+    if (d2 > (3.0f * 3.0f * D * D) || (D * D < 0.01f * h)) {
         float up = -2.0f * dx * dy * branch.x;
         up -= (-dx * dx + dy * dy - h) * branch.y;
         up /= d2 + h;

@@ -153,15 +153,11 @@ void calcVelNaiveandStep(std::vector<float> &u, std::vector<float> &x, const std
     }
 }
 
-void draw() {
-
-}
-
 int main() {
 
     std::cout << "Num. of Threads: " << omp_get_max_threads() << "\n";
 
-    float H = 0.01f;
+    float H = 0.05f;
     float h = H * H;
     std::vector<float> u;
     std::vector<float> x;
