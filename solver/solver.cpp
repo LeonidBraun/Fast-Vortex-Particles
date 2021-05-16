@@ -172,7 +172,7 @@ int main() {
     float dt = 0.002f;
 
     std::cout << G.size() << "\n";
-    //auto t1 = std::chrono::high_resolution_clock::now();
+    auto t1 = std::chrono::high_resolution_clock::now();
     for (size_t i = 0; i < 400; i++) {
         exportData(x, u, G, "test", i);
         //system("cls");
