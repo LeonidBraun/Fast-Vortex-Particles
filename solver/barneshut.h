@@ -1,9 +1,7 @@
 #pragma once
 #include <vector>
 #include <cmath>
-#include <iostream>
-#include <chrono>
-#include <string>
+//#include <iostream>
 #include "omp.h"
 
 struct Branch {
@@ -31,3 +29,5 @@ Tree createTree(std::vector<float>& x, std::vector<float>& G, const float& h);
 void destroyTree(Tree& tree);
 
 void calcVelandStep(std::vector<float>& u, std::vector<float>& x, const std::vector<float>& G, const float& h, Tree& tree, const float& dt);
+
+void calcVelRK2(std::vector<float>& u, std::vector<float>& x, const std::vector<float>& G, const float& h, const float& dt);
