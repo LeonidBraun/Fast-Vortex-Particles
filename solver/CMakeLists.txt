@@ -9,11 +9,7 @@ target_link_libraries(solver PRIVATE vtu11 barneshut)
 project(barneshut)
 add_library(barneshut STATIC barneshut.h barneshut.cpp)
 
-target_compile_features(solver PUBLIC cxx_std_11)
-
-if(UNIX)
-    SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
-endif()
+# target_compile_features(solver PUBLIC cxx_std_11)
 
 find_package(OpenMP)
 if(OpenMP_CXX_FOUND)

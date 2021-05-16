@@ -5,10 +5,6 @@ project(
     VERSION 0.1
     DESCRIPTION "Particle")
 
-if(UNIX)
-    SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
-endif()
-
 #if (MSVC)
 #    add_compile_options(/O2)
 #else()
