@@ -48,10 +48,10 @@ void force(std::vector<float>& u, std::vector<float>& x, std::vector<float>& G, 
     u.push_back(0); u.push_back(0);
     u.push_back(0); u.push_back(0);
 
-    G.push_back(-dt / 2);
-    G.push_back(-dt / 2);
     G.push_back(dt / 2);
     G.push_back(dt / 2);
+    G.push_back(-dt / 2);
+    G.push_back(-dt / 2);
 }
 
 void downsample(std::vector<float>& x, std::vector<float>& G, float dx, float xcut) {
@@ -174,9 +174,9 @@ int main() {
         //system("cls");
         std::cout << "finished: " << (int)(i/4) << "%   iterations: " << i*50 << "   num. Particles: " << G.size() << "\r";
 
-        for (size_t l = 0; l < 5; l++) {
-            force(u, x, G, 10 * dt);
-            for (size_t k = 0; k < 10; k++) {
+        for (size_t l = 0; l < 5*5; l++) {
+            force(u, x, G, 2 * dt);
+            for (size_t k = 0; k < 2; k++) {
                 //Euler + N^2
                 //calcVelNaiveandStep(u, x, G, h, dt);
 
