@@ -29,3 +29,7 @@ https://user-images.githubusercontent.com/47603904/117414889-f5ed2480-af17-11eb-
 `cmake ..`
 
 `make` on Linux or open `Particle.sln` in Visual Studio on Windows
+
+## Visualisation
+
+Since its exporting VTU files one cann view the results with Paraview
