@@ -1,5 +1,7 @@
 #include "barneshut.h"
 
+#include <cstdlib>
+
 int select(float x, float y) {
   int a = x > 0 ? 1 : 0;
   if (y > 0) {
@@ -142,12 +144,15 @@ void calcVelandStep(std::vector<float>& u, std::vector<float>& x,
 }
 
 void calcVelRK2(std::vector<float>& u, std::vector<float>& x,
-                const std::vector<float>& G, const float h, const float dt) {
+                const std::vector<float>& G, const float h, const float dt,
+                const size_t iters) {
   std::vector<float> x_p(x.size());
   Tree tree = createTree(x, G, h);
 #pragma omp parallel for
   for (long long i = 0; i < G.size(); i++) {
-    float up = -1.5f, vp = 0.0f;
+    std::srand(iters * (unsigned int)i);
+    float up = 0.0f + 0.1 * ((float)std::rand() / RAND_MAX - 0.5);
+    float vp = 0.0f + 0.1 * ((float)std::rand() / RAND_MAX - 0.5);
     evaluate(up, vp, x[2 * i + 0], x[2 * i + 1], h, *tree.root, tree.xm,
              tree.ym, tree.D);
     x_p[2 * i + 0] = x[2 * i + 0] + 0.5f * dt * up;
@@ -157,7 +162,9 @@ void calcVelRK2(std::vector<float>& u, std::vector<float>& x,
   tree = createTree(x_p, G, h);
 #pragma omp parallel for
   for (long long i = 0; i < G.size(); i++) {
-    float up = -1.5f, vp = 0.0f;
+    std::srand(iters * (unsigned int)i);
+    float up = 0.0f + 0.1 * ((float)std::rand() / RAND_MAX - 0.5);
+    float vp = 0.0f + 0.1 * ((float)std::rand() / RAND_MAX - 0.5);
     evaluate(up, vp, x_p[2 * i + 0], x_p[2 * i + 1], h, *tree.root, tree.xm,
              tree.ym, tree.D);
     x[2 * i + 0] += dt * up;

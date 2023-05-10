@@ -188,8 +188,7 @@ void calcVelNaiveandStep(std::vector<float>& u, std::vector<float>& x,
 int main() {
   std::cout << "Num. of Threads: " << omp_get_max_threads() << "\n";
 
-  //   float H = 0.05f;
-  float H = 0.1f;
+  float H = 0.05f;
   float h = H * H;
   std::vector<float> u;
   std::vector<float> x;
@@ -201,10 +200,12 @@ int main() {
 
   std::cout << G.size() << "\n";
   auto t1 = std::chrono::high_resolution_clock::now();
+  size_t iterations = 0;
   for (size_t i = 0; i < 200; i++) {
     exportData(x, u, G, "test", i);
     // system("cls");
-    std::cout << "finished: " << (int)(i / 4) << "%   iterations: " << i * 50
+    std::cout << "finished: " << (int)(i / 4)
+              << "%   iterations: " << iterations
               << "   num. Particles: " << G.size() << "\r";
 
     for (size_t l = 0; l < 5 * 5; l++) {
@@ -219,7 +220,8 @@ int main() {
         // destroyTree(tree);
 
         // RK2 distance preserving
-        calcVelRK2(u, x, G, h, dt);
+        calcVelRK2(u, x, G, h, dt, iterations);
+        iterations++;
       }
     }
     merge(u, x, G);
